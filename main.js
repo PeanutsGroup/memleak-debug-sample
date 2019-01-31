@@ -22,6 +22,46 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+
+  memleak()
+
+  // heapdump()
+}
+
+function memleak () {
+  // Cause memory leak
+  let leakObject = null;
+  let count = 0;
+  
+  setInterval(function testMemoryLeak() {
+    const originLeakObject = leakObject;
+    const unused = function () {
+      if (originLeakObject) {
+        console.log('originLeakObject');
+      }
+    };
+    leakObject = {
+      count: String(count++),
+      leakStr: new Array(1e7).join('*'),
+      leakMethod: function () {
+        console.log('leakMessage');
+      }
+    };
+  }, 1000);
+}
+
+function heapdump () {
+  // Dump memory
+  const heapdump = require('heapdump');
+  heapdump.writeSnapshot(function(err, filename) {
+    console.log('Dump written to ', filename);
+  });
+
+  setInterval(function testMemoryLeak() {
+    let filename = './' + Date.now() + '.heapsnapshot';
+    console.log('Dumping to ', filename);
+    heapdump.writeSnapshot(filename);
+  }, 30000);
 }
 
 // This method will be called when Electron has finished

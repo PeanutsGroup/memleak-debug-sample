@@ -1,12 +1,13 @@
 {
-  "name": "electron-quick-start",
+  "name": "memleak-debug-sample",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A memory leak debug sample",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-packager . memleak-debug-sample"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/PeanutsGroup/memleak-debug-sample",
   "keywords": [
     "Electron",
     "quick",
@@ -17,6 +18,6 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^4.0.2"
+    "electron": "^4.0.3"
   }
 }
